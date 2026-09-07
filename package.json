@@ -9,7 +9,13 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "clean:reports": "rm -rf cypress/results/*",
+    "cy:run:qauto": "cypress run --config-file cypress.config.qauto.js --spec 'cypress/e2e/garageAndExpenses.cy.js'",
+    "cy:run:qauto2": "cypress run --config-file cypress.config.qauto2.js --spec 'cypress/e2e/garageAndExpenses.cy.js'",
+    "report:merge": "npx mochawesome-merge cypress/results/*.json > cypress/results/combined-report.json",
+    "report:generate": "npx marge cypress/results/combined-report.json --reportDir cypress/results --inline",
+    "report": "npm run report:merge && npm run report:generate"
   },
   "repository": {
     "type": "git",
@@ -28,6 +34,9 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-cypress": "^7.0.0",
     "husky": "^9.1.7",
+    "mochawesome": "^8.0.1",
+    "mochawesome-merge": "^5.1.1",
+    "mochawesome-report-generator": "^6.3.2",
     "prettier": "^3.9.6"
   }
 }
