@@ -23,3 +23,17 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('createExpenseViaApi', (carId, expenseData) => {
+    return cy.request({
+        method: 'POST',
+        url: 'https://qauto.forstudy.space/api/expenses',
+        body: {
+            carId: carId,
+            reportedAt: expenseData.reportedAt,
+            mileage: expenseData.mileage,
+            liters: expenseData.liters,
+            totalCost: expenseData.totalCost,
+            forceMileage: false
+        }
+    });
+});
